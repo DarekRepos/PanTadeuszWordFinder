@@ -8,7 +8,6 @@ def nonblank_lines(my_words):
 
 dir_path = os.path.dirname(__file__)
 
-
 word_list = [elt.strip() for elt in open(dir_path + "\words-list.txt","r").readlines()]
 word_set = set(word_list)
 
@@ -21,3 +20,4 @@ with open(dir_path + "\pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt","r") as e
             counter += 1
 
 print("Number of lines : %d" % counter)
+
