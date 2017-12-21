@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 def nonblank_lines(my_words):
@@ -6,18 +7,17 @@ def nonblank_lines(my_words):
         if line:
             yield line
 
-dir_path = os.path.dirname(__file__)
+DIR_PATH = os.path.dirname(__file__)
 
-word_list = [elt.strip() for elt in open(dir_path + "\words-list.txt","r").readlines()]
-word_set = set(word_list)
+WORD_LIST = [elt.strip() for elt in open(DIR_PATH + "\words-list.txt", "r").readlines()]
+WORD_SET = set(WORD_LIST)
 
-counter = 0
+COUNTER = 0
 
-with open(dir_path + "\pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt","r") as epics_words:
+with open(DIR_PATH + "\pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt", "r") as epics_words:
     for word in nonblank_lines(epics_words):
-        if word not in word_set:
-            print (word)
-            counter += 1
+        if word not in WORD_SET:
+            print(word)
+            COUNTER += 1
 
-print("Number of lines : %d" % counter)
-
+print("Number of lines : %d" % COUNTER)
