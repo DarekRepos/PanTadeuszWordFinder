@@ -32,14 +32,16 @@ WORD_COUNTER = 0
 START = time.time()
 
 with open(DIR_PATH + NAME[1], "r", encoding="utf-8") as epics_words:
-    for word in nonblank_lines(epics_words):
-        print(word)
-        COUNTER += 1
-        if word in WORD_SET:
-            WORD_COUNTER += 1
+    for mix_words_in_line in nonblank_lines(epics_words):
+        print(mix_words_in_line)
+        COUNTER += 1 
+        for word in mix_words_in_line.split(" "):                   
+            if word in WORD_SET:
+                WORD_COUNTER += 1
 
 STOP = time.time()
 
+# TODO: word is sentence and saparate words
 print("Number of lines : %d" % COUNTER)
 print("Found: %d words"% WORD_COUNTER)
 print("Time elapsed: %.1f second" % (STOP - START))
