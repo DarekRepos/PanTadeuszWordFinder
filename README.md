@@ -5,5 +5,5 @@ Counting words in "Pan Tadeusz" poem
 Project to exercise python language
 ## TODO
 - [x] Add poem lines counter
-- [ ] Add Specific word counter
-- [ ] Tracking the script execution time
+- [x] Add Specific word counter
+- [x] Tracking the script execution time
