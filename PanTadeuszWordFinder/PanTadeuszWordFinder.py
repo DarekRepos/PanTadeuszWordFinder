@@ -1,13 +1,15 @@
 """
 count specific word in "Pan Tadeusz" poem
 """
+
+
 # -*- coding: utf-8 -*-
 import os
 import time
 
+
 def nonblank_lines(my_words):
     """[summary]
-
     Function to erase blank lines from text string
 
     Arguments:
@@ -21,27 +23,30 @@ def nonblank_lines(my_words):
         if line:
             yield line
 
-DIR_PATH = os.path.dirname(__file__)
-NAME = ["\\words-list.txt", "\\pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt"]
 
-WORD_LIST = [elt.strip() for elt in open(DIR_PATH + NAME[0], "r", encoding="utf-8").readlines()]
-WORD_SET = set(WORD_LIST)
+dir_path = os.path.dirname(__file__)
+name = ["/words-list.txt", "/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt"]
 
-COUNTER = 0
-WORD_COUNTER = 0
-START = time.time()
+file = open(dir_path + name[0], "r", encoding="utf-8").readlines()
 
-with open(DIR_PATH + NAME[1], "r", encoding="utf-8") as epics_words:
+word_list = [elt.strip() for elt in file]
+
+word_set = set(word_list)
+counter = 0
+word_counter = 0
+start_time = time.time()
+
+with open(dir_path + name[1], "r", encoding="utf-8") as epics_words:
     for mix_words_in_line in nonblank_lines(epics_words):
         print(mix_words_in_line)
-        COUNTER += 1 
-        for word in mix_words_in_line.split(" "):                   
-            if word in WORD_SET:
-                WORD_COUNTER += 1
+        counter += 1
+        for word in mix_words_in_line.split(" "):
+            if word in word_set:
+                word_counter += 1
 
-STOP = time.time()
+stop_time = time.time()
 
 # TODO: word is sentence and saparate words
-print("Number of lines : %d" % COUNTER)
-print("Found: %d words"% WORD_COUNTER)
-print("Time elapsed: %.1f second" % (STOP - START))
+print("Number of lines : %d" % counter)
+print("Found: %d words" % word_counter)
+print("Time elapsed: %.1f second" % (stop_time - start_time))
