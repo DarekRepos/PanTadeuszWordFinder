@@ -27,26 +27,30 @@ def nonblank_lines(my_words):
 dir_path = os.path.dirname(__file__)
 name = ["/words-list.txt", "/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt"]
 
+# Open the list of words
+# for which we want to count the occurrence
+#  in the text of the book "Pan Tadeusz"
 file = open(dir_path + name[0], "r", encoding="utf-8").readlines()
 
 word_list = [elt.strip() for elt in file]
 
 word_set = set(word_list)
+
 counter = 0
 word_counter = 0
+
 start_time = time.time()
 
-with open(dir_path + name[1], "r", encoding="utf-8") as epics_words:
-    for mix_words_in_line in nonblank_lines(epics_words):
-        print(mix_words_in_line)
+# Open Pan Tadeusz book
+with open(dir_path + name[1], "r", encoding="utf-8") as book_text:
+    for line in nonblank_lines(book_text):
         counter += 1
-        for word in mix_words_in_line.split(" "):
+        for word in line.split(" "):
             if word in word_set:
                 word_counter += 1
 
 stop_time = time.time()
 
-# TODO: word is sentence and saparate words
 print("Number of lines : %d" % counter)
 print("Found: %d words" % word_counter)
 print("Time elapsed: %.1f second" % (stop_time - start_time))
