@@ -1,6 +1,6 @@
-import os
 import time
 import click
+import re
 
 
 @click.command()
@@ -8,9 +8,6 @@ import click
 @click.argument('searched_file', type=click.File('r'))
 def calculate_words(words_input, searched_file):
     """ count specific word in "Pan Tadeusz" poem """
-
-    # dir_path = os.path.dirname(__file__)
-    # name = ["/words-list.txt", "/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt"]
 
     # Open the list of words
     # for which we want to count the occurrence
@@ -28,9 +25,11 @@ def calculate_words(words_input, searched_file):
 
     # calculate total number for lines and words
     for line in nonblank_lines(searched_file):
-        counter += 1
-        # each word is separated by space 
-        for word in line.split(" "):
+        # empty lines are not count
+        if not '' in line:
+            counter += 1
+        
+        for word in line:
             if word in word_set:
                 word_counter += 1
 
@@ -44,20 +43,33 @@ def calculate_words(words_input, searched_file):
 def nonblank_lines(text_file):
     """[summary]
     
-    Function to erase blank lines from text string
+    Function to erase blank lines from begin and end of string. 
+    it also remove all nonalphanumerical characters, 
+    but exclude spacex character
 
-    Input: text with 
+    Input: any string text from opened file
 
     Arguments:
-    my_words {String} -- Given string from txt File
+    text_file {String} -- the contents of the file
 
     Yields:
-    String object -- Lines of text poem
-    """
-    for lines in text_file:
-        line = lines.rstrip()
-        if line:
-            yield line
+    List with string elements  -- Lines of text (poem)
+    example : ['word','','word']
+    """ 
+    stripped=''
 
+    for lines in text:
+        line = lines.strip()
+        # split line only by one space multiple spaces are skipped in the list
+        text = re.split(r'\s{1,}',line)
+        stripp=[]
+        for item in text:
+            stripped=  ''.join(ch for ch in item if (ch.isalnum()))
+            
+            stripp.append(stripped)
+        
+        if stripp:
+            yield stripp
+        
 if __name__ == "__main__":
     calculate_words()
