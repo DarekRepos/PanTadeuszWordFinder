@@ -56,9 +56,10 @@ def nonblank_lines(text_file):
     List with string elements  -- Lines of text (poem)
     example : ['word','','word']
     """ 
+    
     stripped=''
 
-    for lines in text:
+    for lines in text_file:
         line = lines.strip()
         # split line only by one space multiple spaces are skipped in the list
         text = re.split(r'\s{1,}',line)
