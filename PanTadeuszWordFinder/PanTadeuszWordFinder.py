@@ -4,7 +4,7 @@ import re
 
 
 @click.command()
-@click.argument('words_input', type=click.File('r'))
+@click.argument('words_input_file', type=click.File('r'))
 @click.argument('searched_file', type=click.File('r'))
 def calculate_words(words_input, searched_file):
     """ count specific word in "Pan Tadeusz" poem """
