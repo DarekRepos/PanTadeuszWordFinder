@@ -12,6 +12,9 @@ Project to exercise python language. The code helped to find specific words in a
 Usage: PanTadeuszWordFinder.py WORDS_INPUT SEARCHED_FILE
 Try 'PanTadeuszWordFinder.py --help' for help
 
+example:
+Python3 PanTadeuszWordFinder.py words.txt text-novel.txt
+
 ## Features
 - [x] poem lines counter
 - [x] a specific word counter
