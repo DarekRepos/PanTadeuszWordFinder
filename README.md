@@ -6,9 +6,9 @@ Counting words in "Pan Tadeusz" poem
 Python 3.10.6
 
 ## Why
-Project to exercise python language. The code helped to find specific words in a selected file. The files can be selected by command line
+Project to exercise python language. The code helped to find specific words in a selected file. The files can be selected by command line.
 
-## how to use
+## How to use
 Usage: PanTadeuszWordFinder.py WORDS_INPUT SEARCHED_FILE
 Try 'PanTadeuszWordFinder.py --help' for help
 
@@ -18,4 +18,4 @@ Python3 PanTadeuszWordFinder.py words.txt text-novel.txt
 ## Features
 - [x] poem lines counter
 - [x] a specific word counter
-- [x] Tracking the script execution time
+- [x] tracking the script execution time
