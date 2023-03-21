@@ -6,13 +6,13 @@ import re
 @click.command()
 @click.argument('words_input_file', type=click.File('r'))
 @click.argument('searched_file', type=click.File('r'))
-def calculate_words(words_input, searched_file):
+def calculate_words(words_input_file, searched_file):
     """ count specific word in "Pan Tadeusz" poem """
 
     # Open the list of words
     # for which we want to count the occurrence
     #  in the text of the book "Pan Tadeusz"
-    file = words_input.readlines()
+    file = words_input_file.readlines()
 
     word_list = [elt.strip() for elt in file]
 
