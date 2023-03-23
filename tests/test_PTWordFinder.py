@@ -22,7 +22,7 @@ def test_help():
 @pytest.mark.parametrize(('files, lines, words, time'),
  [
     ('tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt', 'Number of lines : 9513',
-     'Found: 166 words', 'Time elapsed: 0.3 second'),
+     'Found: 166 words', 'Time elapsed: 0.1 second'),
     ('tests/test-file.txt', 'Number of lines : 4',
      'Found: 6 words', 'Time elapsed: 0.0 second'),
 ],
