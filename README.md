@@ -2,7 +2,7 @@
 [![Build](https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg)](https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml)
 [![Tests Status](https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg)](./reports/junit/report.html)
 [![Coverage Status](https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg)](./reports/coverage/index.html)
-[![Flake8 Status](https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg=8484744)](./reports/flake8/index.html)
+[![Flake8 Status](https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg)](./reports/flake8/index.html)
 
 "What specific words would you like to read?"
 Counting words in "Pan Tadeusz" poem
