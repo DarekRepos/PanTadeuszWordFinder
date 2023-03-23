@@ -9,7 +9,7 @@ tested with Python >= 3.10.6
 It was started as a project to exercise python language. The code helped to find specific words in a selected file. It became command line tool that help find any word within any file. The files can be selected by command line
 
 ## how to use
-you can installl this cmd tool from pip:.py
+you can installl this cmd tool from pip:
 ```
     pip install PTWordFinder
 ```
