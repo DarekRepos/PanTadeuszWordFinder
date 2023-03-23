@@ -17,12 +17,15 @@ Usage: ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
 
 where:
 WORDS_INPUT_FILE - is path to input file (.txt) that contain searched words 
+
 SEARCHED_FILE - is path to file that program search for a specific word
 
 Try 'ptwordf --help' for help
 
 examples:
+
  ptwordf calculate-words words-list.txt test-file.txt
+ 
  ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
 
 ## Features
