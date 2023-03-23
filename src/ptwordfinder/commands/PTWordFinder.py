@@ -71,6 +71,3 @@ def nonblank_lines(text_file):
         
         if stripp:
             yield stripp
-        
-if __name__ == "__main__":
-    calculate_words()
