@@ -2,7 +2,7 @@
 /.vscode/
 
 # virtual enviroments
-/venv
+/*venv
 
 #cache files
 .pytest_cache/
@@ -10,3 +10,7 @@ __pycache__/
 
 # test files
 .coverage
+
+# packages files
+*.egg-info
+dist/
