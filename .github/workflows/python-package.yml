@@ -1,0 +1,68 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: coverage
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10","3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+            run: |
+              cd $GITHUB_WORKSPACE
+              python -m pip install --upgrade pip
+              python -m pip install genbadge[all] pytest coverage
+              if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          - name: show python path
+            run: |
+              python -c "import sys; print('\n'.join(sys.path))"
+          - name: Generate report with coverage in the console
+            run: |
+              python -m pytest
+              coverage run -m pytest
+              coverage report -m
+          - name: Generate xml report with coverage 
+            run: |    
+              pytest --junitxml=reports/junit/junit.xml
+          - name: Generate badge for counted tests
+            run: |
+              genbadge tests -o ./reports/coverage/coverage-unit-badge.svg
+          - name: Generate coverage xml
+            run: |
+              coverage xml
+          - name: Generate coverage html
+            run: |
+              coverage html 
+          - name: Generate coverage badge
+            run: | 
+              genbadge coverage -i ./coverage.xml -o ./reports/coverage/coverage-badge.svg
+          - name: Lint with flake8
+            run: |
+              # stop the build if there are Python syntax errors or undefined names
+              flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+              # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+              flake8 . --exit-zero --format=html --htmldir ./reports/flake8 --statistics --tee --output-file flake8stats.txt
+          - name: generate flake8 badge
+            run: |
+              genbadge flake8 -i flake8stats.txt -o ./reports/flake8/flake8-badge.svg
+          - name: Commit code coverage results to master
+          - uses: stefanzweifel/git-auto-commit-action@v4
+            with:
+              commit_message: Added badges
