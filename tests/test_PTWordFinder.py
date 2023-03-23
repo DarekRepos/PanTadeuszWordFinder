@@ -5,38 +5,38 @@ from unittest import mock
 
 from unittest.mock import Mock
 
-from PanTadeuszWordFinder.PanTadeuszWordFinder import calculate_words
-from PanTadeuszWordFinder.PanTadeuszWordFinder import nonblank_lines
+from src.PTWordFinder import calculate_words
+from src.PTWordFinder import nonblank_lines
 from click.testing import CliRunner
 
 # Functional test
 
 def test_help():
-    exit_status = os.system('python3 PanTadeuszWordFinder.py --help')
+    exit_status = os.system('python3 src/PTWordFinder.py --help')
     assert exit_status == 0
     
 def test_valid_files():
-    exit_status = os.system('python3 PanTadeuszWordFinder.py words-list.txt pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt')
+    exit_status = os.system('python3 src/PTWordFinder.py tests/words-list.txt tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt')
     assert exit_status == 0
 
 def test_too_low_arguments():
-    exit_status = subprocess.run(['python3','PanTadeuszWordFinder.py', 'words-list.txt'], capture_output=True, text=True)
+    exit_status = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt'], capture_output=True, text=True)
     assert True == exit_status.stderr.__contains__('Error: Missing argument')
 
 def test_not_existed_file():
-    exit_status = subprocess.run(['python3','PanTadeuszWordFinder.py', 'words-list.txt', 'nonexisted_file.txt'], capture_output=True, text=True)
+    exit_status = subprocess.run(['python3','src/PTWordFinder.py', 'words-list.txt', 'nonexisted_file.txt'], capture_output=True, text=True)
     assert True == exit_status.stderr.__contains__(' No such file or directory')
 
 def test_number_of_lines():
-    result = subprocess.run(['python3','PanTadeuszWordFinder.py', 'words-list.txt', 'pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
+    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
     assert True == result.stdout.__contains__('Number of lines : 9513')
 
 def test_number_of_words():
-    result = subprocess.run(['python3','PanTadeuszWordFinder.py', 'words-list.txt', 'pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
+    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
     assert True == result.stdout.__contains__('Found: 166 words')
 
 def test_time_in_second():
-    result = subprocess.run(['python3','PanTadeuszWordFinder.py', 'words-list.txt', 'pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
+    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
     # time musat be under 1 second
     assert True == result.stdout.__contains__('Time elapsed: 0.')
     
@@ -44,7 +44,7 @@ def test_time_in_second():
 
 def test_calculate_words():
     runner = CliRunner()
-    result = runner.invoke(calculate_words, ['words-list.txt','test-file.txt'])
+    result = runner.invoke(calculate_words, ['tests/words-list.txt','tests/test-file.txt'])
     assert result.exit_code == 0      
     assert result.output == ("Number of lines : 4\n"
                                 "Found: 6 words\n"
