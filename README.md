@@ -18,7 +18,10 @@ you can installl this cmd tool from pip:
     pip install PTWordFinder
 ```
 
+example:
+Python3 PanTadeuszWordFinder.py words.txt text-novel.txt
+
 ## Features
 - [x] poem lines counter
 - [x] a specific word counter
-- [x] Tracking the script execution time
+- [x] tracking the script execution time
