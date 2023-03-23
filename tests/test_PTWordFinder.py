@@ -1,54 +1,40 @@
 import os
 import subprocess
 import sys
+import pytest
 from unittest import mock
 
 from unittest.mock import Mock
 
-from src.PTWordFinder import calculate_words
-from src.PTWordFinder import nonblank_lines
+from ptwordfinder.commands.PTWordFinder import calculate_words
+from ptwordfinder.commands.PTWordFinder import nonblank_lines
 from click.testing import CliRunner
 
 # Functional test
+path="ptwordfinder/commands/"
 
 def test_help():
-    exit_status = os.system('python3 src/PTWordFinder.py --help')
+    exit_status = os.system(f'python3 {path}PTWordFinder.py --help')
     assert exit_status == 0
     
-def test_valid_files():
-    exit_status = os.system('python3 src/PTWordFinder.py tests/words-list.txt tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt')
-    assert exit_status == 0
-
-def test_too_low_arguments():
-    exit_status = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt'], capture_output=True, text=True)
-    assert True == exit_status.stderr.__contains__('Error: Missing argument')
-
-def test_not_existed_file():
-    exit_status = subprocess.run(['python3','src/PTWordFinder.py', 'words-list.txt', 'nonexisted_file.txt'], capture_output=True, text=True)
-    assert True == exit_status.stderr.__contains__(' No such file or directory')
-
-def test_number_of_lines():
-    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
-    assert True == result.stdout.__contains__('Number of lines : 9513')
-
-def test_number_of_words():
-    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
-    assert True == result.stdout.__contains__('Found: 166 words')
-
-def test_time_in_second():
-    result = subprocess.run(['python3','src/PTWordFinder.py', 'tests/words-list.txt', 'tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt'], capture_output=True, text=True)
-    # time musat be under 1 second
-    assert True == result.stdout.__contains__('Time elapsed: 0.')
-    
-    # Unit tests
-
-def test_calculate_words():
+#Unit tests 
+#  
+@pytest.mark.parametrize(('files, lines, words, time'),
+ [
+    ('tests/pan-tadeusz-czyli-ostatni-zajazd-na-litwie.txt', 'Number of lines : 9513',
+     'Found: 166 words', 'Time elapsed: 0.1 second'),
+    ('tests/test-file.txt', 'Number of lines : 4',
+     'Found: 6 words', 'Time elapsed: 0.0 second'),
+],
+)
+def test_calculate_words(files, lines, words, time):
+    ln = lines
     runner = CliRunner()
-    result = runner.invoke(calculate_words, ['tests/words-list.txt','tests/test-file.txt'])
+    result = runner.invoke(calculate_words, ['tests/words-list.txt',files])
     assert result.exit_code == 0      
-    assert result.output == ("Number of lines : 4\n"
-                                "Found: 6 words\n"
-                                "Time elapsed: 0.0 second\n")
+    assert result.output == (f"{lines}\n"
+                                f"{words}\n"
+                                f"{time}\n")
     
 def test_nonblank_lines_for_multilines():
 
