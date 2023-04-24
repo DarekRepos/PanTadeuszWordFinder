@@ -55,9 +55,9 @@ Features
 
 .. |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |Tests Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
+.. |Tests Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/c57987abc05d76a6f8a1e5898e68821a673ebd95/reports/coverage/coverage-unit-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
-.. |Coverage Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg
+.. |Coverage Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/c57987abc05d76a6f8a1e5898e68821a673ebd95/reports/coverage/coverage-unit-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
-.. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
+.. |Flake8 Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/c57987abc05d76a6f8a1e5898e68821a673ebd95/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
