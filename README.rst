@@ -42,10 +42,12 @@ Try ‘ptwordf –help’ for help
 examples:
 
 ::
-ptwordf calculate-words words-list.txt test-file.txt
+
+       ptwordf calculate-words words-list.txt test-file.txt
 
 ::
-ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
+
+       ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
 
 Features
 --------
