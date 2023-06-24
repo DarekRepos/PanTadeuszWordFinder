@@ -14,3 +14,7 @@ __pycache__/
 # packages files
 *.egg-info
 dist/
+
+# badge files
+
+flake8stats.txt 
