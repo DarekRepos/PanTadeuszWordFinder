@@ -54,10 +54,12 @@ jobs:
           - name: generate flake8 badge
             run: |
               genbadge flake8 -i flake8stats.txt -o ./reports/flake8/flake8-badge.svg
-          - name: move flake8stats.txt and coverage.xml to the report folder
+          - name: move coverage.xml to the report folder
             run: |
               mv ./coverage.xml ./reports
-              mv ./flake8stats.txt ./reports
+          - name: move flake8stats.txt to the report folder
+            run: |
+              mv ./flake8stats.txt ./reports   
           - name: Archive code coverage results
             uses: stefanzweifel/git-auto-commit-action@v4
             with:
