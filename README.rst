@@ -28,7 +28,10 @@ you can installl this cmd tool from pip:
 
        pip install PTWordFinder
 
-Usage: ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
+Usage: 
+::
+
+       ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
 
 where:
 
