@@ -28,7 +28,10 @@ you can installl this cmd tool from pip:
 
        pip install PTWordFinder
 
-Usage: ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
+Usage: 
+::
+
+       ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
 
 where:
 
@@ -41,9 +44,13 @@ Try ‘ptwordf –help’ for help
 
 examples:
 
-ptwordf calculate-words words-list.txt test-file.txt
+::
 
-ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
+       ptwordf calculate-words words-list.txt test-file.txt
+
+::
+
+       ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
 
 Features
 --------
