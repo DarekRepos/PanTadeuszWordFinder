@@ -7,6 +7,7 @@ from unittest import mock
 from unittest.mock import Mock
 
 from ptwordfinder.commands.PTWordFinder import calculate_words
+from ptwordfinder.commands.PTWordFinder import calculate_single_word
 from ptwordfinder.commands.PTWordFinder import nonblank_lines
 from click.testing import CliRunner
 
@@ -89,5 +90,47 @@ def test_nonblank_lines_for_one_line():
     
         assert result ==  expected_text
 
+@pytest.fixture
+def runner():
+    return CliRunner()
+
+@pytest.fixture
+def test_file(tmpdir):
+    # Create a temporary file with some content for testing
+    test_content = "apple banana apple orange"
+    test_file_path = tmpdir.join("test_file.txt")
+    with open(test_file_path, 'w') as f:
+        f.write(test_content)
+    return str(test_file_path)
+
+def test_calculate_single_word(runner, test_file):
+    # Test with a word that appears multiple times
+    result = runner.invoke(calculate_single_word, ['apple', test_file])
+    assert result.exit_code == 0
+    assert "The word 'apple' appears 2 times in the file" in result.output
+
+    # Test with a word that appears once
+    result = runner.invoke(calculate_single_word, ["banana", test_file])
+    assert result.exit_code == 0
+    assert "The word 'banana' appears 1 times in the file" in result.output
+
+    # Test with a word that doesn't appear
+    result = runner.invoke(calculate_single_word, ["grape", test_file])
+    assert result.exit_code == 0
+    assert "The word 'grape' appears 0 times in the file" in result.output
+
+    # Test with a non-existent file
+    result = runner.invoke(calculate_single_word, ["apple", "nonexistent_file.txt"])
+    assert result.exit_code != 1
+    assert "Error: Invalid value for 'SEARCHED_FILE': Path 'nonexistent_file.txt' does not exist." in result.output
+
+    # Test with an empty file
+    empty_file = "empty_file.txt"
+    open(empty_file, "w").close()
+    result = runner.invoke(calculate_single_word, ["apple", empty_file])
+    assert result.exit_code == 0
+    assert "The word 'apple' appears 0 times in the file" in result.output
+
+
 if __name__ == "__main__":
-    sys.exit(calculate_words(sys.argv))     
+    sys.exit(calculate_words(sys.argv), calculate_single_word(sys.argv))    

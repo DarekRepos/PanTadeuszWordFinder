@@ -1,3 +1,4 @@
+import sys
 import time
 import click
 import re
@@ -71,3 +72,41 @@ def nonblank_lines(text_file):
         
         if stripp:
             yield stripp
+
+
+@click.command()
+@click.argument('word')
+@click.argument('searched_file', type=click.Path(exists=True))
+def calculate_single_word(word, searched_file):
+    """
+    Count how many times a word appears in a file.
+    
+    WORD is the word to search for.
+    SEARCHED_FILE is the path to the file to search in.
+    """
+    try:
+        # Initialize a counter to keep track of occurrences
+        count = 0
+        
+        # Open the file in read mode
+        with open(searched_file, 'r') as file:
+            # Read the content of the file
+            file_content = file.read()
+            
+            # Split the content into words
+            words_in_file = file_content.split()
+            
+            # Iterate through the words in the file
+            for w in words_in_file:
+                # Check if the word is in the file
+                if word == w:
+                    # Increment the counter if the word is found
+                    count += 1
+        
+        # Print the count of occurrences
+        click.echo(f"The word '{word}' appears {count} times in the file '{searched_file}'.")
+    
+    except FileNotFoundError:
+        # If the file is not found, print an error message and return a non-zero exit code
+        click.echo(f"Error: Path '{searched_file}' does not exist.", err=True)
+        sys.exit(1)
