@@ -10,6 +10,7 @@ __pycache__/
 
 # test files
 .coverage
+empty_file.txt
 
 # packages files
 *.egg-info
