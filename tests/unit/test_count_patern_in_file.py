@@ -84,6 +84,12 @@ def test_count_pattern_in_file_blank_lines():
 
 
 def test_empty_file():
+    """
+    Test count_pattern_in_file function with an empty file.
+
+    Verifies that:
+    - The count of any pattern in an empty file is 0.
+    """
     pattern = "word"
     with open("empty_file.txt", "w"):
         pass
@@ -95,6 +101,12 @@ def test_empty_file():
 
 
 def test_single_match():
+    """
+    Test count_pattern_in_file function with a single match in the file.
+
+    Verifies that:
+    - The count of the specified pattern in a file with one match is 1.
+    """
     pattern = "word"
     with open("single_match.txt", "w") as file:
         file.write("This is a test line with word.\n")
@@ -106,6 +118,12 @@ def test_single_match():
 
 
 def test_multiple_matches():
+    """
+    Test count_pattern_in_file function with multiple matches in the file.
+
+    Verifies that:
+    - The count of the specified pattern in a file with multiple matches is equal to the number of occurrences.
+    """
     pattern = "the"
     with open("multiple_matches.txt", "w") as file:
         file.write("This is the first line. The second line also has the.\n")
@@ -118,6 +136,12 @@ def test_multiple_matches():
 
 
 def test_case_insensitive():
+    """
+    Test count_pattern_in_file function with case-insensitive matching.
+
+    Verifies that:
+    - The count of the specified pattern in a file is case-insensitive.
+    """
     pattern = "Word"  # Case-insensitive
     with open("single_match.txt", "w") as file:
         file.write("This is a test line with word.\n")
@@ -129,6 +153,12 @@ def test_case_insensitive():
 
 
 def test_nonblank_lines():
+    """
+    Test count_pattern_in_file function with non-blank lines only.
+
+    Verifies that:
+    - The count of the specified pattern considers only non-blank lines in the file.
+    """
     pattern = "line"
     with open("mixed_lines.txt", "w") as file:
         file.write("This is a line with word.\n")
@@ -142,6 +172,12 @@ def test_nonblank_lines():
 
 
 def test_multiple_spaces():
+    """
+    Test count_pattern_in_file function with multiple spaces surrounding the pattern.
+
+    Verifies that:
+    - The count of the specified pattern considers the pattern regardless of surrounding spaces.
+    """
     pattern = "word"
     with open("multiple_spaces.txt", "w") as file:
         file.write("This   is  a line with  word. \n")
@@ -153,6 +189,12 @@ def test_multiple_spaces():
 
 
 def test_invalid_file():
+    """
+    Test count_pattern_in_file function with a non-existent file.
+
+    Verifies that:
+    - The function raises a FileNotFoundError when the specified file does not exist.
+    """
     pattern = "word"
     with pytest.raises(FileNotFoundError):
         count_pattern_in_file(pattern, "nonexistent_file.txt")
