@@ -1,4 +1,5 @@
 import io
+import os
 from unittest.mock import mock_open, patch
 import pytest
 from ptwordfinder.commands.PTWordFinder import count_pattern_in_file
@@ -89,6 +90,9 @@ def test_empty_file():
 
     assert count_pattern_in_file(pattern, "empty_file.txt") == 0
 
+    # Clean up test files
+    os.remove("empty_file.txt")
+
 
 def test_single_match():
     pattern = "word"
@@ -96,6 +100,9 @@ def test_single_match():
         file.write("This is a test line with word.\n")
 
     assert count_pattern_in_file(pattern, "single_match.txt") == 1
+
+    # Clean up test files
+    os.remove("single_match.txt")
 
 
 def test_multiple_matches():
@@ -106,6 +113,9 @@ def test_multiple_matches():
 
     assert count_pattern_in_file(pattern, "multiple_matches.txt") == 3
 
+    # Clean up test files
+    os.remove("multiple_matches.txt")
+
 
 def test_case_insensitive():
     pattern = "Word"  # Case-insensitive
@@ -113,6 +123,9 @@ def test_case_insensitive():
         file.write("This is a test line with word.\n")
 
     assert count_pattern_in_file(pattern, "single_match.txt") == 0
+
+    # Clean up test files
+    os.remove("single_match.txt")
 
 
 def test_nonblank_lines():
@@ -124,6 +137,9 @@ def test_nonblank_lines():
 
     assert count_pattern_in_file(pattern, "mixed_lines.txt") == 2
 
+    # Clean up test files
+    os.remove("mixed_lines.txt")
+
 
 def test_multiple_spaces():
     pattern = "word"
@@ -131,6 +147,9 @@ def test_multiple_spaces():
         file.write("This   is  a line with  word. \n")
 
     assert count_pattern_in_file(pattern, "multiple_spaces.txt") == 1
+
+    # Clean up test files
+    os.remove("multiple_spaces.txt")
 
 
 def test_invalid_file():
