@@ -6,6 +6,8 @@ PTWordFinder
 “What specific words would you like to read?” Counting words in “Pan
 Tadeusz” poem
 
+It is a Python-based command-line tool designed to efficiently find and count occurrences of specific words within text files. It offers flexible input options, supporting both individual words, patterns and word lists in various formats.
+
 Python version
 --------------
 
@@ -19,52 +21,100 @@ to find specific words in a selected file. It became command line tool
 that help find any word within any file. The files can be selected by
 command line
 
-how to use
+Install
 ----------
 
-you can installl this cmd tool from pip:
+you can run the following command in your terminal to install the program from pip:
 
 ::
 
        pip install PTWordFinder
 
+This will download and install the program, along with any required dependencies.
+
+
+If you prefer, you can also install the program from source:
+
+Clone the repository containing the program code:
+
+::
+
+       git clone https://github.com/DarekRepos/PanTadeuszWordFinder.git
+
+
+Replace your-username with your actual username on GitHub.
+Navigate to the cloned directory:
+
+::
+
+       cd  PanTadeuszWordFinder
+
+This method requires poetry or Python build tools. If you don't have them, install poetry using pip install poetry or install your system's package manager's equivalent for build.
+Install the program using poetry (https://python-poetry.org/):
+
+::
+
+       poetry install
+
+The second method involves directly building the wheel and installing it, which is less commonly used.
+Install the program directly:
+
+::
+
+       python -m build
+::
+
+       python -m pip install dist/PTWordFinder-*.whl
+
+Note:
+
+    If you install from source, you will need to have Python development tools installed. You can usually install these using your system's package manager.
+    Installing from pip is the easiest and most recommended method for most users.
+
+
+
 Usage: 
-::
-
-       ptwordf calculate-words WORDS_INPUT_FILE SEARCHED_FILE
-
-where:
-
-WORDS_INPUT_FILE - is path to input file (.txt) that contain searched
-words
-
-SEARCHED_FILE - is path to file that program search for a specific word
-
-Try ‘ptwordf –help’ for help
-
-examples:
+----------
 
 ::
 
-       ptwordf calculate-words words-list.txt test-file.txt
+       python word_counter.py [OPTIONS]
+       Options:
+        -w, --words-input-file FILE          File containing words to search for (mutually exclusive with --single-word)
+        -s, --searched-file FILE              Path to the text file to search in (required)
+        -w, --single-word WORD                Specific word to count (mutually exclusive with --words-input-file)
+        -p, --pattern PATTERN                 Regular expression pattern to match
+        -h, --help                            Show this help message and exit
+
+
+Examples:
+----------
+
+
+Count the word "python" in my_text.txt:
 
 ::
 
-       ptwordf calculate-words srcfolder/words-list.csv newfolder/test-file.csv
+       python word_counter.py --single-word python --searched-file my_text.txt
 
-Features
---------
+Find the frequency of all words in word_list.txt in large_file.txt:
 
--  ☒ lines counter
--  ☒ a specific word counter
--  ☒ tracking the script execution time
--  ☒ support csv files
+::
+
+       python word_counter.py --words-input-file word_list.txt --searched-file large_file.txt
+
+Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
+
+::
+
+       python word_counter.py --pattern "[a-z0-9]{5}" --searched-file passwords.txt
+
 
 .. |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |Tests Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/c57987abc05d76a6f8a1e5898e68821a673ebd95/reports/coverage/coverage-unit-badge.svg
+.. |Tests Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
-.. |Coverage Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/7d5956304ffb4278a142bf0452de57059ee315bb/reports/coverage/coverage-badge.svg
+.. |Coverage Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
-.. |Flake8 Status| image:: https://raw.githubusercontent.com/DarekRepos/PanTadeuszWordFinder/c57987abc05d76a6f8a1e5898e68821a673ebd95/reports/flake8/flake8-badge.svg
+.. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
