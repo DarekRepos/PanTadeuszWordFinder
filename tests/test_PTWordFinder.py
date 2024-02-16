@@ -14,11 +14,16 @@ from ptwordfinder.commands.PTWordFinder import (
     nonblank_lines,
 )
 
-import pytest
 from click.testing import CliRunner
 
 
 def test_help_message():
+    """
+    Test calculate_words function with --help option.
+
+    Verifies that:
+    - The function displays the help message correctly.
+    """
     runner = CliRunner()
     result = runner.invoke(calculate_words, ["--help"])
     assert result.exit_code == 0
@@ -26,6 +31,12 @@ def test_help_message():
 
 
 def test_error_on_both_word_options():
+    """
+    Test calculate_words function with both --words-input-file and --single-word options.
+
+    Verifies that:
+    - The function raises an error when both options are used simultaneously.
+    """
     runner = CliRunner()
     result = runner.invoke(
         calculate_words, ["--words-input-file", "words.txt", "--single-word", "hello"]
@@ -36,6 +47,12 @@ def test_error_on_both_word_options():
 
 
 def test_error_on_missing_options():
+    """
+    Test calculate_words function with missing mandatory options.
+
+    Verifies that:
+    - The function raises an error when required options are not provided.
+    """
     runner = CliRunner()
     result = runner.invoke(calculate_words)
     assert result.exit_code == 2
@@ -44,6 +61,12 @@ def test_error_on_missing_options():
 
 
 def test_count_multiple_words():
+    """
+    Test calculate_words function with --words-input-file option to count multiple words.
+
+    Verifies that:
+    - The function correctly counts the occurrences of words from a file within a text file.
+    """
     # Create test files
     with open("words.txt", "w") as f:
         f.write("hello\nworld")
@@ -64,6 +87,17 @@ def test_count_multiple_words():
 
 
 def test_count_single_word():
+    """
+    Test the `calculate_words` function with the `--single-word` option.
+
+    Verifies that:
+    - The function correctly counts the occurrences of a single specified word in a text file.
+    - The search is case-sensitive (i.e., "Hello" and "hello" are considered different words).
+    - Words are counted within non-blank lines, excluding leading and trailing whitespaces.
+
+    Raises:
+        FileNotFoundError: If the specified searched file does not exist.
+    """
     # Create test file
     with open("text.txt", "w") as f:
         f.write("This is a test sentence with hello and world.")
@@ -80,6 +114,12 @@ def test_count_single_word():
 
 
 def test_count_pattern():
+    """
+    Test the `count_pattern()` function for correctly counting pattern matches.
+
+    Verifies that:
+    - The function accurately counts the number of occurrences of a specified pattern in a text file.
+    """
     # Create test file
     with open("text.txt", "w") as f:
         f.write("This is a test sentence with hello and world.")
@@ -96,6 +136,16 @@ def test_count_pattern():
 
 
 def test_file_not_found():
+    """
+    Test the `calculate_words` function with a non-existent searched file.
+
+    Verifies that:
+    - The function raises a `FileNotFoundError` when the specified searched file does not exist.
+    - The error message indicates that the file does not exist.
+
+    Raises:
+        FileNotFoundError: If the searched file is not found.
+    """
     runner = CliRunner()
     result = runner.invoke(calculate_words, ["--searched-file", "nonexistent_file.txt"])
     assert result.exit_code == 2
