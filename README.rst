@@ -62,6 +62,7 @@ Install the program directly:
 ::
 
        python -m build
+
 ::
 
        python -m pip install dist/PTWordFinder-*.whl
@@ -113,8 +114,8 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
 .. |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
 .. |Tests Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage.xml
 .. |Coverage Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/tree/master/tests/unit
 .. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
