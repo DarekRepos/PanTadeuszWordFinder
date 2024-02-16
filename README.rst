@@ -62,6 +62,7 @@ Install the program directly:
 ::
 
        python -m build
+       
 ::
 
        python -m pip install dist/PTWordFinder-*.whl
