@@ -6,7 +6,7 @@ PTWordFinder
 “What specific words would you like to read?” Counting words in “Pan
 Tadeusz” poem
 
-I is a Python-based command-line tool designed to efficiently find and count occurrences of specific words within text files. It offers flexible input options, supporting both individual words, patterns and word lists in various formats.
+It is a Python-based command-line tool designed to efficiently find and count occurrences of specific words within text files. It offers flexible input options, supporting both individual words, patterns and word lists in various formats.
 
 Python version
 --------------
@@ -35,7 +35,7 @@ This will download and install the program, along with any required dependencies
 
 If you prefer, you can also install the program from source:
 
-    Clone the repository containing the program code:
+Clone the repository containing the program code:
 
 ::
 
