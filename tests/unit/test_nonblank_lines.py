@@ -1,3 +1,4 @@
+import os
 from unittest import mock
 
 from ptwordfinder.commands.PTWordFinder import nonblank_lines
@@ -10,6 +11,9 @@ def test_empty_file():
     lines = list(nonblank_lines(open("empty_file.txt")))
     assert lines == []
 
+    # Clean up test files
+    os.remove("empty_file.txt")
+
 
 def test_single_nonblank_line():
     with open("single_line.txt", "w") as file:
@@ -17,6 +21,9 @@ def test_single_nonblank_line():
 
     lines = list(nonblank_lines(open("single_line.txt")))
     assert lines == [["This", "is", "a", "line"]]
+
+    # Clean up test files
+    os.remove("single_line.txt")
 
 
 def test_multiple_nonblank_lines():
@@ -27,6 +34,9 @@ def test_multiple_nonblank_lines():
 
     lines = list(nonblank_lines(open("multiple_lines.txt")))
     assert lines == [["Line", "1"], ["Line", "2"]]
+
+    # Clean up test files
+    os.remove("multiple_lines.txt")
 
 
 def test_mixed_content():
@@ -41,6 +51,9 @@ def test_mixed_content():
         ["More", "text", "with", "special", "characters"],
     ]
 
+    # Clean up test files
+    os.remove("mixed_content.txt")
+
 
 def test_non_alphanumeric():
     with open("non_alphanumeric.txt", "w") as file:
@@ -49,3 +62,6 @@ def test_non_alphanumeric():
 
     lines = list(nonblank_lines(open("non_alphanumeric.txt")))
     assert lines == [["123abc"], ["漢字日本語"]]
+
+    # Clean up test files
+    os.remove("non_alphanumeric.txt")
