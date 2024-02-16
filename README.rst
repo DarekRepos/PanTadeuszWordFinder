@@ -41,8 +41,9 @@ If you prefer, you can also install the program from source:
 
        git clone https://github.com/DarekRepos/PanTadeuszWordFinder.git
 
-    Replace your-username with your actual username on GitHub.
-    Navigate to the cloned directory:
+
+Replace your-username with your actual username on GitHub.
+Navigate to the cloned directory:
 
 ::
 
@@ -78,12 +79,7 @@ Usage:
 ::
 
        python word_counter.py [OPTIONS]
-
-::
-
        Options:
-::
-
         -w, --words-input-file FILE          File containing words to search for (mutually exclusive with --single-word)
         -s, --searched-file FILE              Path to the text file to search in (required)
         -w, --single-word WORD                Specific word to count (mutually exclusive with --words-input-file)
@@ -95,17 +91,23 @@ Examples:
 ----------
 
 
-    Count the word "python" in my_text.txt:
-::
-    python word_counter.py --single-word python --searched-file my_text.txt
+Count the word "python" in my_text.txt:
 
-    Find the frequency of all words in word_list.txt in large_file.txt:
 ::
-    python word_counter.py --words-input-file word_list.txt --searched-file large_file.txt
 
-    Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
+       python word_counter.py --single-word python --searched-file my_text.txt
+
+Find the frequency of all words in word_list.txt in large_file.txt:
+
 ::
-    python word_counter.py --pattern "[a-z0-9]{5}" --searched-file passwords.txt
+
+       python word_counter.py --words-input-file word_list.txt --searched-file large_file.txt
+
+Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
+
+::
+
+       python word_counter.py --pattern "[a-z0-9]{5}" --searched-file passwords.txt
 
 
 .. |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
