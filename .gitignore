@@ -16,6 +16,9 @@ empty_file.txt
 *.egg-info
 dist/
 
+# mypy 
+.mypy_cache/
+
 # badge files
 
 flake8stats.txt 
