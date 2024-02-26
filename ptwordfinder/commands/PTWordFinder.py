@@ -1,14 +1,43 @@
+"""
+This module provides tools for counting the occurrences of words
+or patterns in a text file.
+
+It offers several functionalities:
+
+* Counting the occurrences of words from a provided file containing words
+  (using the `--words-input-file` option).
+* Counting occurrences of a specific word
+  (using the `--single-word` option).
+* Counting occurrences of a regular expression pattern
+  (using the `--pattern` option).
+
+**Features:**
+
+* Handles both single words and word lists.
+* Supports regular expressions for pattern matching.
+* Provides informative error messages and usage instructions.
+* Efficiently iterates through the file, considering only non-blank lines.
+
+**Usage:**
+
+```bash
+python word_counter.py [--words-input-file FILE] [--single-word WORD] \
+                        [--pattern PATTERN] searched_file
+"""
+
+from typing import Iterator, List, Set
+
 import sys
 import time
-import click
 import re
+import click
 
 
 @click.command()
 @click.option(
     "--words-input-file",
     "-w",
-    type=click.File("r"),
+    type=click.File("r", lazy=True),
     help="File containing words to search for",
 )
 @click.option(
@@ -25,30 +54,43 @@ import re
     help="Specific word to count (exclusive to --words-input-file)",
 )
 @click.option("--pattern", "-p", help="Regular expression pattern to match")
-def calculate_words(words_input_file, searched_file, single_word, pattern):
+def calculate_words(
+    words_input_file: click.File,
+    searched_file: str,
+    single_word: str,
+    pattern: str,
+) -> None:
     """Count the occurrence of words in a text file.
 
     Args:
-        words_input_file (file, optional): File containing words to search for. Defaults to None.
+        words_input_file (file, optional): File containing words to search for.
+                                           Defaults to None.
         searched_file (str): Path to the text file to search in. Required.
         single_word (str, optional): Specific word to count. Defaults to None.
-        pattern (str, optional): Regular expression pattern to match. Defaults to None.
+        pattern (str, optional): Regular expression pattern to match.
+                                 Defaults to None.
 
     Note:
         --words-input-file and --single-word are mutually exclusive.
-        At least one of --words-input-file, --single-word, or --pattern must be provided.
+        At least one of --words-input-file, --single-word,
+        or --pattern must be provided.
     """
 
+    op1 = "--words-input-file"
+    op2 = "--single-word"
+    op3 = "--pattern"
+
     if words_input_file and single_word:
+
         click.echo(
-            "Error: --words-input-file and --single-word are mutually exclusive.",
+            f"Error: {op1} and {op2} are mutually exclusive.",
             err=True,
         )
         sys.exit(1)
 
     if not (words_input_file or single_word or pattern):
         click.echo(
-            "Error: At least one of --words-input-file, --single-word, or --pattern must be provided.",
+            f"Error: At least one of {op1}, {op2}, or {op3} must be provided.",
             err=True,
         )
         sys.exit(1)
@@ -57,12 +99,13 @@ def calculate_words(words_input_file, searched_file, single_word, pattern):
 
     if words_input_file:
         # Process list of words
-        word_list = [elt.strip() for elt in words_input_file.readlines()]
-        word_set = set(word_list)
-        counter = count_multiple_words_in_file(word_set, searched_file)
-        print(
-            f"Found {counter} matching words from '{words_input_file}' in '{searched_file}'."
-        )
+        with open(words_input_file.name, "r", encoding="utf8") as file:
+            word_list = [elt.strip() for elt in file.readlines()]
+            words = set(word_list)
+            counter = count_multiple_words_in_file(words, searched_file)
+            file1 = words_input_file.name
+            file2 = searched_file
+        print(f"Found {counter} matching words from '{file1}' in '{file2}'.")
 
     elif single_word:
         # Count specific word
@@ -71,74 +114,76 @@ def calculate_words(words_input_file, searched_file, single_word, pattern):
 
     else:
         # Match regular expression pattern
-        counter = count_pattern_in_file(pattern, searched_file)
-        print(f"Found {counter} matches for pattern '{pattern}' in '{searched_file}'.")
+        c = count_pattern_in_file(pattern, searched_file)
+        with open(searched_file, "r", encoding="utf8") as f:
+            print(f"Found {c} matches for pattern '{pattern}' in '{f.name}'.")
 
     stop_time = time.time()
-    print(f"Time elapsed: %.1f seconds" % (stop_time - start_time))
+    elapsed_time = stop_time - start_time
+    print(f"Time elapsed: {elapsed_time:.1f} seconds")
 
 
-def count_multiple_words_in_file(word_set, searched_file):
+def count_multiple_words_in_file(words: Set[str], searched_file: str) -> int:
     """
     Count the occurrences of words from a given word set in a text file.
 
     Args:
-        word_set (set): A set containing the words to search for.
+        words (set): A set containing the words to search for.
         searched_file (str): The path to the text file to search in.
 
     Returns:
-        int: The total count of occurrences of words from the word set in the text file.
+        int: The total count of occurrences of words
+             from the word set in the text file.
 
     Note:
-        This function reads the content of the text file specified by 'searched_file'
-        and counts the occurrences of words from 'word_set' in each non-blank line of the file.
-        It utilizes the 'nonblank_lines' generator to yield non-blank lines from the file.
-        The function returns the total count of occurrences of words from 'word_set' in the file.
+        This function reads the content of the text file specified
+        by 'searched_file' and counts the occurrences of words
+        from 'words' in each non-blank line of the file.
+        It utilizes the 'non_blank_lines' generator to yield non-blank lines
+        from the file.
+        The function returns the total count of occurrences of words
+        from 'words' in the file.
     """
 
     counter = 0
-    with open(searched_file, "r") as file:
-        for line in nonblank_lines(file):
+    with open(searched_file, "r", encoding="utf8") as file:
+        for line in non_blank_lines(file):
             for word in line:
-                if word in word_set:
+                if word in words:
                     counter += 1
     return counter
 
 
-def count_word_in_file(word, searched_file):
+def count_word_in_file(word: str, searched_file: str) -> int:
     """Count how many times a word appears in a file.
 
     Args:
         word (str): The word to search for.
         searched_file (str): The path to the file to search in.
+
+    Returns:
+        int: The count of occurrences of the word in the file.
     """
     try:
-        # Initialize a counter to keep track of occurrences
         count = 0
-
         # Open the file in read mode
-        with open(searched_file, "r") as file:
-            # Read the content of the file
-            file_content = file.read()
-
-            # Split the content into words
-            words_in_file = file_content.split()
-
-            # Iterate through the words in the file
-            for w in words_in_file:
-                # Check if the word is in the file
-                for match in re.findall(word, w):
-                    count += 1
+        with open(searched_file, "r", encoding="utf8") as file:
+            # Read the file line by line
+            for line in file:
+                # Count occurrences of the word in the line
+                count += line.count(word)
 
         # Print the count of occurrences
         return count
 
     except FileNotFoundError:
-        # If the file is not found, print an error message and return a non-zero exit code
+        # If the file is not found,
+        # print an error message and return a non-zero exit code
         click.echo(f"Error: Path '{searched_file}' does not exist.", err=True)
         raise
 
-def count_pattern_in_file(pattern, searched_file):
+
+def count_pattern_in_file(pattern: str, searched_file: str) -> int:
     """Counts occurrences of a pattern in a file, considering non-blank lines.
 
     Args:
@@ -150,19 +195,19 @@ def count_pattern_in_file(pattern, searched_file):
     """
 
     counter = 0
-    with open(searched_file, "r") as file:
+    with open(searched_file, "r", encoding="utf8") as file:
+        # Iterate through each line in the file
         for line in file:
-            for match in re.findall(pattern, line):
-                print(match)
-                counter += 1
+            # Count occurrences of the pattern in the line
+            counter += sum(1 for _ in re.finditer(pattern, line))
     return counter
 
 
-def nonblank_lines(text_file):
+def non_blank_lines(text_file: Iterator[str]) -> Iterator[List[str]]:
     """Generate non-blank lines from a text file.
-    
+
     - erased blank lines from begin and end of string
-    - it also remove all nonalphanumerical characters
+    - it also remove all non alphanumerical characters
     - exclude space character
 
     Input: any string text from opened file
@@ -177,10 +222,9 @@ def nonblank_lines(text_file):
     for line in text_file:
         line = line.strip()
         if line:
-            text = re.split(r"\s{1,}", line)
+            text = re.split(r"\s+", line)
             stripped_line = []
             for item in text:
                 stripped = "".join(ch for ch in item if ch.isalnum())
                 stripped_line.append(stripped)
             yield stripped_line
-
