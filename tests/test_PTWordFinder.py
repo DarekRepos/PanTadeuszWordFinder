@@ -1,18 +1,7 @@
-import io
 import os
 import re
-import pytest
-from unittest import mock
 
-from unittest.mock import mock_open, patch
-
-from ptwordfinder.commands.PTWordFinder import (
-    calculate_words,
-    count_multiple_words_in_file,
-    count_word_in_file,
-    count_pattern_in_file,
-    nonblank_lines,
-)
+from ptwordfinder.commands.PTWordFinder import calculate_words
 
 from click.testing import CliRunner
 
