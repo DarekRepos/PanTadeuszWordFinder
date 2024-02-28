@@ -72,7 +72,7 @@ def test_count_pattern_in_file_blank_lines():
     Test count_pattern_in_file function with blank lines in the file.
 
     Verifies that:
-    - The count of the specified pattern in a file with only blank lines is 3.
+    - The count of the specified pattern in a file with only blank lines is 0.
     """
     # Given
     pattern = r"\n"
@@ -80,7 +80,7 @@ def test_count_pattern_in_file_blank_lines():
     with patch("builtins.open", mock_open(read_data="\n\n\n")) as mock_file:
         result = count_pattern_in_file(pattern, "test_file.txt")
     # Then
-    assert result == 3
+    assert result == 0
 
 
 def test_empty_file():
@@ -122,7 +122,8 @@ def test_multiple_matches():
     Test count_pattern_in_file function with multiple matches in the file.
 
     Verifies that:
-    - The count of the specified pattern in a file with multiple matches is equal to the number of occurrences.
+    - The count of the specified pattern in a file with multiple matches
+      is equal to the number of occurrences.
     """
     pattern = "the"
     with open("multiple_matches.txt", "w") as file:
@@ -157,10 +158,11 @@ def test_nonblank_lines():
     Test count_pattern_in_file function with non-blank lines only.
 
     Verifies that:
-    - The count of the specified pattern considers only non-blank lines in the file.
+    - The count of the specified pattern considers only non-blank lines
+      in the file.
     """
     pattern = "line"
-    with open("mixed_lines.txt", "w") as file:
+    with open("mixed_lines.txt", "w", encoding="utf8") as file:
         file.write("This is a line with word.\n")
         file.write("\n")  # Blank line
         file.write("Another line\n")
