@@ -22,7 +22,7 @@ def test_file(tmpdir):
     """
     test_content = mock_file_content
     test_file_path = tmpdir.join("test-file.txt")
-    with open(test_file_path, "w") as f:
+    with open(test_file_path, "w", encoding="utf8") as f:
         f.write(test_content)
     return str(test_file_path)
 
