@@ -36,7 +36,7 @@ import click
 @click.command()
 @click.option(
     "--words-input-file",
-    "-w",
+    "-i",
     type=click.File("r", lazy=True),
     help="File containing words to search for",
 )
