@@ -36,7 +36,7 @@ import click
 @click.command()
 @click.option(
     "--words-input-file",
-    "-w",
+    "-i",
     type=click.File("r", lazy=True),
     help="File containing words to search for",
 )
@@ -60,7 +60,8 @@ def calculate_words(
     single_word: str,
     pattern: str,
 ) -> None:
-    """Count the occurrence of words in a text file.
+    """
+    Count the occurrence of words in a text file.
 
     Args:
         words_input_file (file, optional): File containing words to search for.
@@ -193,13 +194,13 @@ def count_pattern_in_file(pattern: str, searched_file: str) -> int:
     Returns:
         int: The number of occurrences of the pattern in the file.
     """
-
+    sanitized_pattern = sanitize_pattern(pattern)
     counter = 0
     with open(searched_file, "r", encoding="utf8") as file:
         # Iterate through each line in the file
         for line in file:
             # Count occurrences of the pattern in the line
-            counter += sum(1 for _ in re.finditer(pattern, line))
+            counter += sum(1 for _ in re.finditer(sanitized_pattern, line))
     return counter
 
 
@@ -228,3 +229,30 @@ def non_blank_lines(text_file: Iterator[str]) -> Iterator[List[str]]:
                 stripped = "".join(ch for ch in item if ch.isalnum())
                 stripped_line.append(stripped)
             yield stripped_line
+
+
+def sanitize_pattern(pattern: str) -> str:
+    """
+    Sanitizes a pattern string to prevent potential security vulnerabilities
+    in regular expressions, specifically injection attacks like SQL injection.
+
+    Args:
+        pattern (str): The pattern to sanitize.
+
+    Returns:
+        str: The sanitized pattern.
+    """
+
+    if not isinstance(pattern, str):
+        raise TypeError("Input must be a string")
+
+    # Escape metacharacters like `.` (`\.`), `^` (`\^`), `$` (`\$`), etc.
+    escaped_pattern = re.escape(pattern)
+
+    # Additional sanitization (optional):
+    # - Remove control characters (e.g., \n, \t, \r)
+    # - Limit allowed characters based on context (e.g., alphanumeric only)
+    # - Consider context-specific whitelisting
+    #   or blacklisting for sensitive filters
+
+    return escaped_pattern

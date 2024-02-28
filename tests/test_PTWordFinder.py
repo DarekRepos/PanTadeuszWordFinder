@@ -1,9 +1,8 @@
 import os
 import re
 
-from ptwordfinder.commands.PTWordFinder import calculate_words
-
 from click.testing import CliRunner
+from ptwordfinder.commands.PTWordFinder import calculate_words
 
 
 def test_help_message():
@@ -57,9 +56,9 @@ def test_count_multiple_words():
     - The function correctly counts the occurrences of words from a file within a text file.
     """
     # Create test files
-    with open("words.txt", "w") as f:
+    with open("words.txt", "w", encoding="utf8") as f:
         f.write("hello\nworld")
-    with open("text.txt", "w") as f:
+    with open("text.txt", "w", encoding="utf8") as f:
         f.write("This is a test sentence with hello and world.")
 
     runner = CliRunner()
@@ -88,7 +87,7 @@ def test_count_single_word():
         FileNotFoundError: If the specified searched file does not exist.
     """
     # Create test file
-    with open("text.txt", "w") as f:
+    with open("text.txt", "w", encoding="utf8") as f:
         f.write("This is a test sentence with hello and world.")
 
     runner = CliRunner()
@@ -107,10 +106,11 @@ def test_count_pattern():
     Test the `count_pattern()` function for correctly counting pattern matches.
 
     Verifies that:
-    - The function accurately counts the number of occurrences of a specified pattern in a text file.
+    - The function accurately counts the number of occurrences
+    of a specified pattern in a text file.
     """
     # Create test file
-    with open("text.txt", "w") as f:
+    with open("text.txt", "w", encoding="utf8") as f:
         f.write("This is a test sentence with hello and world.")
 
     runner = CliRunner()
