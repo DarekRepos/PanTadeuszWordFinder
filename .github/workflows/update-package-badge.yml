@@ -41,7 +41,7 @@ jobs:
       - name: Update README with Badge URL
         run: |
           BADGE_URL=${{ env.badge_url }}
-          sed -i "s|image:: .*|image:: ${BADGE_URL}|g" README.rst
+          sed -i "s|/|PyPi Badge/| image:: .*|image:: ${BADGE_URL}|g" README.rst
 
       - name: Commit and Push Changes
         run: |
