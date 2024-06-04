@@ -21,12 +21,11 @@ jobs:
           # api_key: ${{ secrets.PYPI_API_KEY }}  # Optional: API key for private packages
 
       - name: Generate Badge URL
+        id: generate_badge_url
         run: |
           VERSION=${{ steps.pypi_version.outputs.version }}
-          BADGE_URL="https://img.shields.io/pypi/v/$VERSION-green.svg?style=flat"
-          echo "Generated Badge URL: $BADGE_URL"
-        outputs:
-          badge_url: ${{ steps.generate-badge.outputs.BADGE_URL }}
+          BADGE_URL="https://img.shields.io/pypi/v/${VERSION}-green.svg?style=flat"
+          echo "BADGE_URL=${BADGE_URL}" >> $GITHUB_ENV
 
       - name: Download Badge Image
         uses: actions/download-artifact@v3  # Download artifact (optional)
@@ -36,7 +35,7 @@ jobs:
 
       - name: Upload Badge Image (Optional)
         uses: actions/upload-artifact@v3  # Upload artifact (optional)
-        if: steps.download-badge-image.outputs.artifact_exists  # Skip if not downloaded
+        if: steps.download_badge_image.outputs.artifact_exists  # Skip if not downloaded
         with:
           name: badge-pypi-version  # Artifact name (optional, adjust if needed)
           path: badge.svg  # Upload filename (adjust as needed)
@@ -47,4 +46,4 @@ jobs:
         with:
           path: README.rst  # File to modify
           pattern: '\|PyPi Badge\| image:: (.*)'  # Pattern to replace (replace with your placeholder)
-          replacement: "\|PyPi Badge\| image\:\: ${{ steps.Generate_Badge_URL.outputs.badge_url }}"
+          replacement: "\|PyPi Badge\| image\:\: ${BADGE_URL}"
