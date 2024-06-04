@@ -26,8 +26,10 @@ jobs:
         id: generate_badge_url
         run: |
           VERSION=${{ steps.pypi_version.outputs.version }}
+          echo "version=$VERSION"
           BADGE_URL="https://img.shields.io/pypi/v/${VERSION}.svg"
           echo "badge_url=${BADGE_URL}" >> $GITHUB_ENV
+          echo "badge_url=${BADGE_URL}"
 
       - name: Create Badge
         id: create_badge
@@ -41,7 +43,7 @@ jobs:
       - name: Update README with Badge URL
         run: |
           BADGE_URL=${{ env.badge_url }}
-          sed -i "s|/|PyPi Badge/| image:: .*|image:: ${BADGE_URL}|g" README.rst
+          sed -i "s||PyPi Badge| image:: .*|image:: ${BADGE_URL}|g" README.rst
 
       - name: Commit and Push Changes
         run: |
