@@ -47,4 +47,4 @@ jobs:
         with:
           path: README.rst  # File to modify
           pattern: '\|PyPi Badge\| image:: (.*)'  # Pattern to replace (replace with your placeholder)
-          replacement: "\|PyPi Badge\| image:: ${{ steps.generate-badge.outputs.badge_url }}"
+          replacement: "\|PyPi Badge\| image:: ${{ steps.Generate_Badge_URL_(Shields.io).outputs.badge_url }}"
