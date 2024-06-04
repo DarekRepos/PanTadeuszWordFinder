@@ -14,18 +14,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3  # Checkout the repository
 
-      - name: Get PyPI Version
+      - name: Get PyPI Version and Generate Badge URL
         id: pypi_version
         run: |
           PACKAGE_NAME=${{ secrets.PACKAGE_NAME }}
           VERSION=$(curl -s https://pypi.org/pypi/$PACKAGE_NAME/json | jq -r .info.version)
           echo "version=$VERSION" >> $GITHUB_ENV
-          echo "version=$VERSION"
-
-      - name: Generate Badge URL
-        id: generate_badge_url
-        run: |
-          VERSION=$(echo ${{ steps.pypi_version.outputs.version }})
           echo "version=$VERSION"
           BADGE_URL="https://img.shields.io/pypi/v/${VERSION}.svg"
           echo "badge_url=${BADGE_URL}" >> $GITHUB_ENV
@@ -43,7 +37,7 @@ jobs:
       - name: Update README with Badge URL
         run: |
           BADGE_URL=${{ env.badge_url }}
-          sed -i "s/^\s*PyPi Badge/image:: ${BADGE_URL}/g" README.rst
+          sed -i "s/image:: https:\/\/img.shields.io\/pypi\/v\/([^/]+)\.svg /image:: ${BADGE_URL}/g" README.rst
 
       - name: Commit and Push Changes
         run: |

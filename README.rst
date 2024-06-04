@@ -119,5 +119,5 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/tree/master/tests/unit
 .. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
-.. |PyPi Badge| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
+.. |PyPi Badge| image:: https://img.shields.io/pypi/v/${VERSION}.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
