@@ -17,7 +17,7 @@ jobs:
       - name: Get PyPI Version
         id: pypi_version
         run: |
-          PACKAGE_NAME=${{ secrets.PTWordFinder }}
+          PACKAGE_NAME=${{ secrets.PACKAGE_NAME }}
           VERSION=$(curl -s https://pypi.org/pypi/$PACKAGE_NAME/json | jq -r .info.version)
           echo "version=$VERSION" >> $GITHUB_ENV
 
