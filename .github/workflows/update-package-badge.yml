@@ -19,13 +19,13 @@ jobs:
         PACKAGE_NAME="example-package"
         VERSION=$(curl -s https://pypi.org/pypi/$PACKAGE_NAME/json | jq -r .info.version)
         BADGE_URL="https://img.shields.io/pypi/v/${PACKAGE_NAME}.svg"
-        README_FILE="README.md"
+        README_FILE="README.rst"
         sed -i.bak "s|!\[PyPI version\](https://img.shields.io/pypi/v/.*)|![PyPI version](${BADGE_URL})|g" $README_FILE
 
     - name: Commit and push changes
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-        git add README.md
+        git add README.rst
         git commit -m "Update PyPI version badge"
         git push
