@@ -20,7 +20,7 @@ jobs:
           package_name: ${{ secrets.PTWordFinder }}  # Replace with your package name
           # api_key: ${{ secrets.PYPI_API_KEY }}  # Optional: API key for private packages
 
-      - name: Generate Badge URL (Shields.io)
+      - name: Generate Badge URL
         run: |
           VERSION=${{ steps.pypi_version.outputs.version }}
           BADGE_URL="https://img.shields.io/pypi/v/$VERSION-green.svg?style=flat"
@@ -47,4 +47,4 @@ jobs:
         with:
           path: README.rst  # File to modify
           pattern: '\|PyPi Badge\| image:: (.*)'  # Pattern to replace (replace with your placeholder)
-          replacement: "\|PyPi Badge\| image:: ${{ steps.Generate_Badge_URL_(Shields.io).outputs.badge_url }}"
+          replacement: "\|PyPi Badge\| image:: ${{ steps.Generate_Badge_URL.outputs.badge_url }}"
