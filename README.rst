@@ -111,15 +111,13 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
        python word_counter.py --pattern "[a-z0-9]{5}" --searched-file passwords.txt
 
 
-.. |Build| image:: https://img.shields.io/pypi/v/.svg
+... |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |Tests Status| image:: https://img.shields.io/pypi/v/.svg
+.. |Tests Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage.xml
-.. |Coverage Status| image:: https://img.shields.io/pypi/v/.svg
+.. |Coverage Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/tree/master/tests/unit
-.. |Flake8 Status| image:: https://img.shields.io/pypi/v/.svg
+.. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
-.. |PyPi Badge| image:: https://img.shields.io/pypi/v/.svg
+.. |PyPi Badge| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
-
-
