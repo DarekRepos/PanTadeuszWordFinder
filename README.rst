@@ -111,7 +111,7 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
        python word_counter.py --pattern "[a-z0-9]{5}" --searched-file passwords.txt
 
 
-... |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
+.. |Build| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
 .. |Tests Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-unit-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage.xml
