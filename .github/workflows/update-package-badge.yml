@@ -20,6 +20,7 @@ jobs:
           PACKAGE_NAME=${{ secrets.PACKAGE_NAME }}
           VERSION=$(curl -s https://pypi.org/pypi/$PACKAGE_NAME/json | jq -r .info.version)
           echo "version=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION"
 
       - name: Generate Badge URL
         id: generate_badge_url
