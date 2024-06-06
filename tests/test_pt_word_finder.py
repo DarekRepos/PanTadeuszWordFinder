@@ -1,8 +1,31 @@
+"""
+Test module for the `calculate_words` function from the
+`ptwordfinder.commands.pt_word_finder` module.
+
+This module contains the following test cases:
+1. `test_help_message`: Verifies that the help message is displayed correctly
+   when using the --help option.
+2. `test_error_on_both_word_options`: Verifies that an error is raised when
+   both --words-input-file and --single-word options are used simultaneously.
+3. `test_error_on_missing_options`: Verifies that an error is raised when
+   required options are not provided.
+4. `test_count_multiple_words`: Verifies that the function correctly counts
+   the occurrences of words from a file within a text file using the
+   --words-input-file option.
+5. `test_count_single_word`: Verifies that the function correctly counts the
+   occurrences of a single specified word in a text file using the
+   --single-word option.
+6. `test_count_pattern`: Verifies that the function correctly counts the number
+   of occurrences of a specified pattern in a text file.
+7. `test_file_not_found`: Verifies that a FileNotFoundError is raised when the
+   specified searched file does not exist.
+"""
+
 import os
 import re
 
 from click.testing import CliRunner
-from ptwordfinder.commands.PTWordFinder import calculate_words
+from ptwordfinder.commands.pt_word_finder import calculate_words
 
 
 def test_help_message():
@@ -20,17 +43,21 @@ def test_help_message():
 
 def test_error_on_both_word_options():
     """
-    Test calculate_words function with both --words-input-file and --single-word options.
+    Test calculate_words function with both --words-input-file
+    and --single-word options.
 
     Verifies that:
     - The function raises an error when both options are used simultaneously.
     """
     runner = CliRunner()
     result = runner.invoke(
-        calculate_words, ["--words-input-file", "words.txt", "--single-word", "hello"]
+        calculate_words, [
+            "--words-input-file", "words.txt", "--single-word", "hello"
+            ]
     )
     assert result.exit_code == 2
-    assert re.search("Error: Invalid value for '--words-input-file'", result.output)
+    assert re.search(
+        "Error: Invalid value for '--words-input-file'", result.output)
     assert re.search("No such file or directory", result.output)
 
 
@@ -50,10 +77,12 @@ def test_error_on_missing_options():
 
 def test_count_multiple_words():
     """
-    Test calculate_words function with --words-input-file option to count multiple words.
+    Test calculate_words function with --words-input-file option
+    to count multiple words.
 
     Verifies that:
-    - The function correctly counts the occurrences of words from a file within a text file.
+    - The function correctly counts the occurrences of words
+    from a file within a text file.
     """
     # Create test files
     with open("words.txt", "w", encoding="utf8") as f:
@@ -79,9 +108,12 @@ def test_count_single_word():
     Test the `calculate_words` function with the `--single-word` option.
 
     Verifies that:
-    - The function correctly counts the occurrences of a single specified word in a text file.
-    - The search is case-sensitive (i.e., "Hello" and "hello" are considered different words).
-    - Words are counted within non-blank lines, excluding leading and trailing whitespaces.
+    - The function correctly counts the occurrences of a single specified word
+        in a text file.
+    - The search is case-sensitive
+        (i.e., "Hello" and "hello" are considered different words).
+    - Words are counted within non-blank lines,
+    excluding leading and trailing whitespaces.
 
     Raises:
         FileNotFoundError: If the specified searched file does not exist.
@@ -92,7 +124,9 @@ def test_count_single_word():
 
     runner = CliRunner()
     result = runner.invoke(
-        calculate_words, ["--single-word", "hello", "--searched-file", "text.txt"]
+        calculate_words, [
+            "--single-word", "hello", "--searched-file", "text.txt"
+            ]
     )
     assert result.exit_code == 0
     assert "Found 'hello' 1 times in 'text.txt'." in result.output
@@ -114,11 +148,11 @@ def test_count_pattern():
         f.write("This is a test sentence with hello and world.")
 
     runner = CliRunner()
-    result = runner.invoke(
+    val = runner.invoke(
         calculate_words, ["--pattern", "world", "--searched-file", "text.txt"]
     )
-    assert result.exit_code == 0
-    assert "Found 1 matches for pattern 'world' in 'text.txt'." in result.output
+    assert val.exit_code == 0
+    assert "Found 1 matches for pattern 'world' in 'text.txt'." in val.output
 
     # Clean up test file
     os.remove("text.txt")
@@ -129,13 +163,16 @@ def test_file_not_found():
     Test the `calculate_words` function with a non-existent searched file.
 
     Verifies that:
-    - The function raises a `FileNotFoundError` when the specified searched file does not exist.
+    - The function raises a `FileNotFoundError`
+        when the specified searched file does not exist.
     - The error message indicates that the file does not exist.
 
     Raises:
         FileNotFoundError: If the searched file is not found.
     """
     runner = CliRunner()
-    result = runner.invoke(calculate_words, ["--searched-file", "nonexistent_file.txt"])
+    result = runner.invoke(calculate_words, [
+        "--searched-file", "nonexistent_file.txt"
+        ])
     assert result.exit_code == 2
     assert re.search("does not exist.", result.output)

@@ -1,7 +1,7 @@
 PTWordFinder
 ============
 
-|Build| |Tests Status| |Coverage Status| |Flake8 Status|
+|Build| |Tests Status| |Coverage Status| |Flake8 Status| |PyPi Badge|
 
 “What specific words would you like to read?” Counting words in “Pan
 Tadeusz” poem
@@ -118,4 +118,6 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
 .. |Coverage Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/coverage/coverage-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/tree/master/tests/unit
 .. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
+.. |PyPi Badge| image:: https://img.shields.io/pypi/v/PTWordFinder
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
