@@ -1,5 +1,22 @@
+"""
+Test module for the `count_word_in_file` function from the
+`ptwordfinder.commands.pt_word_finder` module.
+
+This module contains the following test cases:
+1. `test_count_word_in_file`: Verifies that the function correctly counts the
+   occurrences of a known word in a file.
+2. `test_word_not_found`: Verifies that the function returns a count of 0 for
+   a word that is not present in the file.
+3. `test_file_not_found`: Verifies that the function raises a FileNotFoundError
+   when attempting to count a word in a non-existent file.
+
+The module also includes a fixture:
+- `test_file`: Creates a temporary file with predefined content for testing
+  purposes.
+"""
+
 import pytest
-from ptwordfinder.commands.PTWordFinder import count_word_in_file
+from ptwordfinder.commands.pt_word_finder import count_word_in_file
 
 # Mocking a file content for testing
 mock_file_content = """
@@ -20,7 +37,7 @@ def test_file(tmpdir):
     """
     test_content = mock_file_content
     test_file_path = tmpdir.join("test-file.txt")
-    with open(test_file_path, "w") as f:
+    with open(test_file_path, "w", encoding="utf-8") as f:
         f.write(test_content)
     return str(test_file_path)
 
