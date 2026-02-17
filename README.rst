@@ -124,11 +124,11 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
 .. |PyPi Badge| image:: https://img.shields.io/pypi/v/PTWordFinder
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
-.. |PyPI version| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |Python versions| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |License: MIT| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
-.. |CI| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
-   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
+.. |PyPI version| image:: https://badge.fury.io/py/PTWordFinder.svg
+   :target: https://badge.fury.io/py/PTWordFinder
+.. |Python versions| image:: https://img.shields.io/pypi/pyversions/PTWordFinder
+   :target: https://pypi.org/project/PTWordFinder/
+.. |License: MIT| image::https://img.shields.io/badge/License-MIT-yellow.svg
+   :target: https://opensource.org/licenses/MIT
+.. |CI| image::https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-publish.yml/badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions
