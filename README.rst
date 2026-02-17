@@ -1,7 +1,10 @@
 PTWordFinder
 ============
 
-|Build| |Tests Status| |Coverage Status| |Flake8 Status|
+|Build| |Tests Status| |Coverage Status| |Flake8 Status| |PyPi Badge|
+|PyPI version| |Python versions| |License: MIT| |CI|
+
+Python word & pattern counter – single words, word lists or regex – originally built for Pan Tadeusz analysis
 
 “What specific words would you like to read?” Counting words in “Pan
 Tadeusz” poem
@@ -119,3 +122,13 @@ Match instances of the regular expression [a-z0-9]{5} in passwords.txt:
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/tree/master/tests/unit
 .. |Flake8 Status| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/blob/master/reports/flake8/flake8-badge.svg
    :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
+.. |PyPi Badge| image:: https://img.shields.io/pypi/v/PTWordFinder
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/
+.. |PyPI version| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
+.. |Python versions| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
+.. |License: MIT| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
+.. |CI| image:: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml/badge.svg
+   :target: https://github.com/DarekRepos/PanTadeuszWordFinder/actions/workflows/python-package.yml
