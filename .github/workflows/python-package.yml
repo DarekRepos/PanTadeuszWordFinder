@@ -2,6 +2,8 @@ name: 'coverage'
 on:
   push:
     branches: [ "master" ]
+permissions:
+  contents: write
 jobs:
     coverage:
         runs-on: ubuntu-latest
