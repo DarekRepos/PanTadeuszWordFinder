@@ -87,7 +87,7 @@ Options:
 
 **Usage Demo:**
 <p align="center">
-  <img src="recordings/demo.gif" alt="PTWordFinder Demo" width="600">
+  <img src="recordings/word_counter_demo.gif" alt="PTWordFinder Demo" width="600">
 </p>
 
 
