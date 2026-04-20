@@ -1,0 +1,16 @@
+anybadge
+attrs
+autopep8
+build
+click
+coverage
+exceptiongroup
+iniconfig
+packaging
+pluggy
+pycodestyle
+pyparsing
+pyproject_hooks
+pytest
+pytest-cov
+tomli
