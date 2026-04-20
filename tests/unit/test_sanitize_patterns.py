@@ -65,7 +65,7 @@ def test_sanitize_pattern_with_disallowed_characters():
     - Disallowed characters are escaped from the input string.
     """
     original_pattern = "abc123#@!()+*^$|. "
-    sanitized_pattern = "abc123\#@!\\(\\)\\+\\*\\^\\$\\|\\.\\ "
+    sanitized_pattern = r"abc123\#@!\(\)\+\*\^\$\|\.\ "
     assert sanitize_pattern(original_pattern) == sanitized_pattern
 
 
