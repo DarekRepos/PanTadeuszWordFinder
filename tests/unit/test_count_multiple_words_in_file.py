@@ -1,6 +1,22 @@
+"""
+Test module for the `count_multiple_words_in_file` function
+from the `ptwordfinder.commands.pt_word_finder` module.
+
+This module contains the following test cases:
+1. `test_file` fixture: Creates a temporary file with mock content for testing.
+2. `test_count_multiple_words_in_file_given_word_set`:
+    Verifies that the correct count is returned for a given word set.
+3. `test_count_multiple_words_in_file_given_empty_word_set`:
+    Verifies that the count is zero for an empty word set.
+4. `test_count_multiple_words_in_file_given_nonexistent_word`:
+    Verifies that the count is zero for a word set with non-existent words.
+5. `test_count_multiple_words_in_file_nonexistent_file`:
+    Verifies that a FileNotFoundError is raised for a non-existent file.
+"""
+
 import pytest
 
-from ptwordfinder.commands.PTWordFinder import count_multiple_words_in_file
+from ptwordfinder.commands.pt_word_finder import count_multiple_words_in_file
 
 
 # Mocking a file content for testing
@@ -70,7 +86,8 @@ def test_count_multiple_words_in_file_given_empty_word_set(test_file):
 
 def test_count_multiple_words_in_file_given_nonexistent_word(test_file):
     """
-    When counting words in a file with a word set containing non-existent words,
+    When counting words in a file
+    with a word set containing non-existent words,
 
     Args:
     test_file (str): Path of the test file.

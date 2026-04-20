@@ -1,13 +1,44 @@
+"""
+Test module for the `count_pattern_in_file` function from the
+`ptwordfinder.commands.pt_word_finder` module.
+
+This module contains the following test cases:
+1. `mock_file` fixture: Creates a StringIO object to simulate a file.
+2. `test_count_pattern_in_file_no_matches`: Verifies that the function returns
+   0 when there are no matches.
+3. `test_count_pattern_in_file_matches`: Verifies that the function returns the
+   correct count of matches.
+4. `test_count_pattern_in_file_empty_file`: Verifies that the function returns
+   0 for an empty file.
+5. `test_count_pattern_in_file_blank_lines`: Verifies that the function returns
+   0 for a file with only blank lines.
+6. `test_empty_file`: Verifies that the function returns 0 for an empty file
+   using an actual file.
+7. `test_single_match`: Verifies that the function returns 1 for a file with
+   one match.
+8. `test_multiple_matches`: Verifies that the function returns the correct
+   count for a file with multiple matches.
+9. `test_case_insensitive`: Verifies that the function handles case-insensitive
+   matching correctly.
+10. `test_nonblank_lines`: Verifies that the function considers only non-blank
+    lines.
+11. `test_multiple_spaces`: Verifies that the function handles patterns
+    surrounded by multiple spaces correctly.
+12. `test_invalid_file`: Verifies that the function raises a FileNotFoundError
+    for a non-existent file.
+"""
+
 import io
 import os
 from unittest.mock import mock_open, patch
 import pytest
-from ptwordfinder.commands.PTWordFinder import count_pattern_in_file
+from ptwordfinder.commands.pt_word_finder import count_pattern_in_file
 
 
 @pytest.fixture
 def mock_file():
-    # Create a StringIO object to simulate a file
+    """Create a StringIO object to simulate a file"""
+
     file_content = "This is a test file without any test matches.\n"
     return io.StringIO(file_content)
 
@@ -63,6 +94,7 @@ def test_count_pattern_in_file_empty_file():
     # When
     with patch("builtins.open", mock_open(read_data="")) as mock_file:
         result = count_pattern_in_file(pattern, "test_file.txt")
+        print(mock_file)
     # Then
     assert result == 0
 
@@ -79,6 +111,7 @@ def test_count_pattern_in_file_blank_lines():
     # When
     with patch("builtins.open", mock_open(read_data="\n\n\n")) as mock_file:
         result = count_pattern_in_file(pattern, "test_file.txt")
+        print(mock_file)
     # Then
     assert result == 0
 
@@ -91,7 +124,7 @@ def test_empty_file():
     - The count of any pattern in an empty file is 0.
     """
     pattern = "word"
-    with open("empty_file.txt", "w"):
+    with open("empty_file.txt", "w", encoding="utf8"):
         pass
 
     assert count_pattern_in_file(pattern, "empty_file.txt") == 0
@@ -108,7 +141,7 @@ def test_single_match():
     - The count of the specified pattern in a file with one match is 1.
     """
     pattern = "word"
-    with open("single_match.txt", "w") as file:
+    with open("single_match.txt", "w", encoding="utf8") as file:
         file.write("This is a test line with word.\n")
 
     assert count_pattern_in_file(pattern, "single_match.txt") == 1
@@ -126,7 +159,7 @@ def test_multiple_matches():
       is equal to the number of occurrences.
     """
     pattern = "the"
-    with open("multiple_matches.txt", "w") as file:
+    with open("multiple_matches.txt", "w", encoding="utf8") as file:
         file.write("This is the first line. The second line also has the.\n")
         file.write("A third line, but without the pattern.\n")
 
@@ -144,7 +177,7 @@ def test_case_insensitive():
     - The count of the specified pattern in a file is case-insensitive.
     """
     pattern = "Word"  # Case-insensitive
-    with open("single_match.txt", "w") as file:
+    with open("single_match.txt", "w", encoding="utf8") as file:
         file.write("This is a test line with word.\n")
 
     assert count_pattern_in_file(pattern, "single_match.txt") == 0
@@ -175,13 +208,15 @@ def test_nonblank_lines():
 
 def test_multiple_spaces():
     """
-    Test count_pattern_in_file function with multiple spaces surrounding the pattern.
+    Test count_pattern_in_file function
+    with multiple spaces surrounding the pattern.
 
     Verifies that:
-    - The count of the specified pattern considers the pattern regardless of surrounding spaces.
+    - The count of the specified pattern considers the pattern
+    regardless of surrounding spaces.
     """
     pattern = "word"
-    with open("multiple_spaces.txt", "w") as file:
+    with open("multiple_spaces.txt", "w", encoding="utf8") as file:
         file.write("This   is  a line with  word. \n")
 
     assert count_pattern_in_file(pattern, "multiple_spaces.txt") == 1
@@ -195,7 +230,8 @@ def test_invalid_file():
     Test count_pattern_in_file function with a non-existent file.
 
     Verifies that:
-    - The function raises a FileNotFoundError when the specified file does not exist.
+    - The function raises a FileNotFoundError
+    when the specified file does not exist.
     """
     pattern = "word"
     with pytest.raises(FileNotFoundError):

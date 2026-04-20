@@ -1,6 +1,34 @@
+"""
+Test module for the `sanitize_pattern` function from the
+`ptwordfinder.commands.pt_word_finder` module.
+
+This module contains the following test cases:
+1. `test_sanitize_pattern_with_allowed_characters`:
+Verifies that allowed characters
+   remain unchanged in the sanitized pattern.
+2. `test_sanitize_pattern_simple`:
+Verifies that the function correctly escapes
+   special characters in a simple input pattern.
+3. `test_sanitize_pattern_with_disallowed_characters`:
+Verifies that disallowed
+   characters are escaped in the input pattern.
+4. `test_sanitize_pattern_with_empty_pattern`:
+Verifies that an empty string input
+   returns an empty string.
+5. `test_no_special_characters`:
+Verifies that the function returns the same string
+   when the input has no special characters.
+6. `test_escape_metacharacters`:
+Verifies the escaping of metacharacters in various
+   patterns using parameterized inputs.
+7. `test_sanitize_pattern_with_non_string_input`:
+Verifies that passing a non-string
+   input raises a TypeError.
+"""
+
 import pytest
 
-from ptwordfinder.commands.PTWordFinder import sanitize_pattern
+from ptwordfinder.commands.pt_word_finder import sanitize_pattern
 
 
 def test_sanitize_pattern_with_allowed_characters():
